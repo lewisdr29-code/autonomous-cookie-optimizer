@@ -3,13 +3,13 @@
 This is a browser-based simulation of a closed-loop materials science laboratory. It models the automated process of finding the exact annealing conditions needed to convert amorphous titanium dioxide (the "raw dough") into the anatase phase ("perfectly crispy"), without over-baking it into the rutile phase ("burnt").
 
 **Author:** Lewis Rael
-**Context:** Developed for the CINT Integration Laboratory to demonstrate system architecture and optimization logic.
+**Context:** Developed for the CINT Integration intersnhip posting to demonstrate system architecture and optimization logic.
 
 ---
 
 ## System Architecture and Hardware Mapping
 
-The simulation runs on standard ES6 JavaScript modules. Instead of a single monolithic script, the code is separated into distinct classes that represent the physical hardware used in the lab. This mirrors a standard two-layer control stack: a high-level decision node communicating with a real-time operating system (RTOS).
+The simulation runs on standard ES6 JavaScript modules. The code is separated into distinct classes that represent the physical hardware used in the lab. This mirrors a standard two-layer control stack: a high-level decision node communicating with a real-time operating system (RTOS).
 
 * **MagnaTranHandler.js (The Handler)**
     * Real hardware: Brooks MagnaTran LEAP robot on a Marathon Express platform.
