@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autonomous Cookie Optimizer · TiO₂ Phase Optimization</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <div class="brand">
+      <p class="eyebrow">Autonomous TiO₂ Phase Optimization · Closed-Loop Kitchen</p>
+      <h1>Autonomous Cookie Optimizer <span>/ raw dough (amorphous)&nbsp;→&nbsp;crispy (anatase)</span></h1>
+    </div>
+    <div class="status">
+      <div class="live"><div class="cookie-icon" id="dot"><i></i></div><span id="stage">Idle — awaiting start</span></div>
+      <div id="substage">Anneal: UHV · 200 mTorr O₂ · azimuthal rotation</div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-target="tab-control">Control & Monitoring</button>
+    <button class="tab-btn" data-target="tab-twin">System Animation & Analysis</button>
+  </div>
+
+  <div id="tab-control" class="tab-content active">
+    <section class="readouts">
+      <div class="stat"><div class="k">Iteration</div><div class="v" id="r-iter">0<small> / 24</small></div></div>
+      <div class="stat hl"><div class="k">Best Crispy Fraction</div><div class="v" id="r-best">—</div></div>
+      <div class="stat"><div class="k">Best Conditions</div><div class="v" id="r-cond">—</div></div>
+      <div class="stat"><div class="k">Last Measurement</div><div class="v" id="r-last">—</div></div>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Baking Map (Response Surface)</h2>
+        <canvas id="map" height="420"></canvas>
+      </div>
+      <div class="right">
+        <div class="card">
+          <h2>The Inspector (Raman)</h2>
+          <div class="sub" id="raman-sub">awaiting first cookie test</div>
+          <canvas id="raman" height="190"></canvas>
+        </div>
+        <div class="card">
+          <h2>Convergence</h2>
+          <canvas id="conv" height="170"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="primary" id="btn-step">▶ Bake one cookie (Step)</button>
+      <button id="btn-auto">⟳ Auto-bake (Loop)</button>
+      <button id="btn-reset">↺ Reset</button>
+      <span class="pill">The Brain: <b style="color:var(--amber)">edge-AI GP optimizer</b></span>
+      <div class="toggle" id="view">
+        <button data-v="belief" class="active">Model belief</button>
+        <button data-v="truth">Ground truth</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-twin" class="tab-content">
+    <div class="card twin-panel">
+      <h2>Digital Twin Simulator</h2>
+      <div class="speed-controls">
+        <label>Simulation Speed:</label>
+        <button class="spd-btn" data-speed="1">1x</button>
+        <button class="spd-btn" data-speed="2">2x</button>
+        <button class="spd-btn active" data-speed="5">5x</button>
+        <button class="spd-btn" data-speed="10">10x</button>
+      </div>
+      
+      <div class="animation-stage" id="anim-stage">
+        <div class="hw-row">
+          <div class="hw-module handler" id="ui-handler">🤖 MagnaTran Handler</div>
+          <div class="hw-info" id="info-handler">
+            <b>Step 1: Load</b><br>
+            Transfers the Si/TiO₂ sample from the cassette through the load-lock into the UHV chamber with zero atmospheric exposure.
+          </div>
+        </div>
+        <div class="hw-row">
+          <div class="hw-module oven" id="ui-oven">🔥 EpiCentre Oven</div>
+          <div class="hw-info" id="info-oven">
+            <b>Step 2: Anneal</b><br>
+            Heats the film in ultra-high vacuum with 200 mTorr O₂, executing the exact PID temperature ramp and dwell time.
+          </div>
+        </div>
+        <div class="hw-row">
+          <div class="hw-module inspector" id="ui-inspector">🔍 inVia Inspector</div>
+          <div class="hw-info" id="info-inspector">
+            <b>Steps 3 & 4: Characterize & Score</b><br>
+            Probes the film with confocal Raman to fingerprint crystal phases, peak-fitting the 144 cm⁻¹ mode to score anatase fraction.
+          </div>
+        </div>
+        <div class="hw-row">
+          <div class="hw-module brain" id="ui-brain">🧠 Jetson Optimizer</div>
+          <div class="hw-info" id="info-brain">
+            <b>Step 5: Decide</b><br>
+            Updates the Gaussian-Process model and maximizes Expected Improvement to pick the next best annealing conditions.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="summary" class="card" style="display:none;margin-top:18px;">
+      <h2>🍪 Final Analysis — Optimization Complete</h2>
+      <div class="sum-grid">
+        <div class="sum-stat"><div class="k">Best crispy (anatase)</div><div class="v" id="sum-ana">—</div></div>
+        <div class="sum-stat"><div class="k">Winning recipe</div><div class="v" id="sum-cond">—</div></div>
+        <div class="sum-stat"><div class="k">Guided experiments</div><div class="v" id="sum-iter">—</div></div>
+      </div>
+      <div class="phasebar" id="sum-bar">
+        <div class="seg seg-ana" id="seg-ana"></div>
+        <div class="seg seg-rut" id="seg-rut"></div>
+        <div class="seg seg-amo" id="seg-amo"></div>
+      </div>
+      <div class="phasekey">
+        <span><i style="background:var(--good)"></i> crispy (anatase) <b id="key-ana">—</b></span>
+        <span><i style="background:var(--burnt)"></i> burnt (rutile) <b id="key-rut">—</b></span>
+        <span><i style="background:#e6ddd2"></i> raw (amorphous) <b id="key-amo">—</b></span>
+      </div>
+      <p class="sum-text" id="sum-text"></p>
+    </section>
+  </div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
