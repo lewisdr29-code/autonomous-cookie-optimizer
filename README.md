@@ -19,7 +19,7 @@ The simulation runs on standard ES6 JavaScript modules. The code is separated in
     * Role: Controls the simulated thermodynamic environment, managing the temperature ramp and dwell time under a 200 mTorr O2 atmosphere.
 * **InViaInspector.js (The Inspector)**
     * Real hardware: Renishaw inVia Qontor confocal Raman microscope.
-    * Role: Calculates the simulated Raman spectra using Lorentzian peak-fitting to determine the phase fractions (evaluating the 144 cm^-1 and 612 cm^-1 modes).
+    * Role: Synthesizes a noisy Raman spectrum (anatase 144 cm^-1 Lorentzian, rutile 447/612 cm^-1 Lorentzians, broad amorphous Gaussian hump, sloped fluorescence baseline), subtracts a linear fluorescence baseline anchored at the two endpoints, integrates fixed windows at 144, 447/612, and 290 cm^-1 for each phase, and computes the figure of merit as anatase/(anatase+rutile+amorphous) response-calibrated against a noise-free pure-anatase standard.
 * **JetsonBrain.js (The Optimizer)**
     * Real hardware: NVIDIA Jetson node.
     * Role: Runs the Gaussian-Process Bayesian optimization. It calculates the next experimental conditions by maximizing Expected Improvement.
